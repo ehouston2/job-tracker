@@ -2,7 +2,8 @@ import { useState } from 'react'
 
 function App() {
   const [company, setCompany] = useState('')
-  const [postition, setPosition] = useState('')
+  const [position, setPosition] = useState('')
+  const [status, setStatus] = useState('Applied')
   const [applications, setApplications] = useState([])
 
   const handleSubmit = (e) => {
@@ -11,14 +12,15 @@ function App() {
     const newApplication = {
       id: Date.now(),
       company: company,
-      postition: postition,
-      status: 'Applied'
+      position: position,
+      status: status
     }
 
     setApplications([...applications, newApplication])
 
     setCompany('')
     setPosition('')
+    setStatus('Applied')
 
   }
 
@@ -44,10 +46,23 @@ function App() {
           <input
             type='text'
             placeholder='Position'
-            value={postition}
+            value={position}
             onChange={(e) => setPosition(e.target.value)}
             style={{ width: '100%', padding: '10px', fontSize: '16px' }}
           />
+        </div>
+
+        <div>
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            style={{ width: '100%', padding: '10px', fontSize: '16px', marginTop: '10px' }}
+          >
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview</option>
+            <option value="Offer">Offer</option>
+            <option value="Rejected">Rejected</option>
+          </select>
         </div>
 
         <button type="submit" style={{ padding: '10px 20px', fontSize: '16px' }}>
@@ -63,9 +78,14 @@ function App() {
             border: '1px solid #ddd',
             padding: '15px',
             marginBottom: '10px',
-            borderRadius: '5px'
+            borderRadius: '5px',
+            backgroundColor:
+              app.status === 'Offer' ? '#beffc3' :
+                app.status === 'Interview' ? '#afdeff' :
+                  app.status === 'Rejected' ? '#fa9aa8' :
+                    '#5a5a5a'
           }}>
-            <strong>{app.company}</strong> - {app.postition}
+            <strong>{app.company}</strong> - {app.position}
             <div style={{ fontSize: '14px', color: '#666', marginTop: '5px' }}>
               Status: {app.status}
             </div>
