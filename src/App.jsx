@@ -1,10 +1,29 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { useEffect } from 'react'
 
 function App() {
   const [company, setCompany] = useState('')
   const [position, setPosition] = useState('')
   const [status, setStatus] = useState('Applied')
   const [applications, setApplications] = useState([])
+
+  const isFirstRender = useRef(true)
+
+  useEffect(() => {
+    const saved = localStorage.getItem('applications')
+    if (saved) {
+      setApplications(JSON.parse(saved))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+    localStorage.setItem('applications', JSON.stringify(applications))
+  }, [applications])
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
