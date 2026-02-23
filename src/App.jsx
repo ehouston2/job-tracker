@@ -6,6 +6,7 @@ function App() {
   const [position, setPosition] = useState('')
   const [status, setStatus] = useState('Applied')
   const [applications, setApplications] = useState([])
+  const [filter, setFilter] = useState('All')
 
   const isFirstRender = useRef(true)
 
@@ -47,6 +48,11 @@ function App() {
     setApplications(applications.filter(app => app.id !== idToDelete))
   }
 
+  const filteredApplications = applications.filter(app => {
+    if (filter === 'All') return true
+    return app.status === filter
+  })
+
   return (
     <div style={{ padding: '20px', maxWidth: '600px' }}>
       <h1>Job Application Tracker</h1>
@@ -75,7 +81,7 @@ function App() {
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value)}
-            style={{ width: '100%', padding: '10px', fontSize: '16px', marginTop: '10px' }}
+            style={{ width: '100%', padding: '10px', fontSize: '16px', marginTop: '15px' }}
           >
             <option value="Applied">Applied</option>
             <option value="Interview">Interview</option>
@@ -84,15 +90,35 @@ function App() {
           </select>
         </div>
 
-        <button type="submit" style={{ padding: '10px 20px', fontSize: '16px' }}>
+        <button type="submit" style={{ padding: '10px 20px', fontSize: '16px', marginTop: '15px' }}>
           Add Application
         </button>
 
       </form>
 
+      <div style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
+        <button onClick={() => setFilter('All')}>
+          All
+        </button>
+        <button onClick={() => setFilter('Applied')}>
+          Applied
+        </button>
+        <button onClick={() => setFilter('Interview')}>
+          Interview
+        </button>
+        <button onClick={() => setFilter('Offer')}>
+          Offer
+        </button>
+        <button onClick={() => setFilter('Rejected')}>
+          Rejected
+        </button>
+      </div>
+
+
       <div style={{ marginTop: '30px' }}>
-        <h2>Applications ({applications.length})</h2>
-        {applications.map(app => (
+        <h2>Applications ({filteredApplications.length})</h2>
+
+        {filteredApplications.map(app => (
           <div key={app.id} style={{
             border: '1px solid #ddd',
             padding: '15px',
