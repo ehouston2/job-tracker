@@ -125,7 +125,7 @@ function App() {
             marginBottom: '10px',
             borderRadius: '5px',
             backgroundColor:
-              app.status === 'Offer' ? '#beffc3' :
+              app.status === 'Offer' ? '#84fd8e' :
                 app.status === 'Interview' ? '#afdeff' :
                   app.status === 'Rejected' ? '#fa9aa8' :
                     '#5a5a5a'
