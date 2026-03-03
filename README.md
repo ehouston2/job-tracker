@@ -1,16 +1,29 @@
-# React + Vite
+# Job Application Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Track job applications with status updates and filtering.
 
-Currently, two official plugins are available:
+[Live Demo](https://elijah-job-tracker.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Add/delete job applications
+- Filter by status (Applied, Interview, Offer, Rejected)
+- Color-coded cards
+- Data persists with localStorage
 
-## React Compiler
+## Tech Stack
+React • Vite • JavaScript • localStorage
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## What I Learned
+- React hooks (useState, useEffect, useRef)
+- Form handling and controlled components
+- Array filtering and mapping
+- localStorage for data persistence
+- Deploying React apps to Netlify
 
-## Expanding the ESLint configuration
+## Setup
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Built by [Elijah Houston](https://github.com/ehouston2)
