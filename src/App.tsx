@@ -1,11 +1,20 @@
-import { useRef, useState } from 'react'
-import { useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import type { SubmitEvent } from 'react'
+
+type AppStatus = 'Applied' | 'Interview' | 'Offer' | 'Rejected';
+
+interface JobApplication {
+  id: number;
+  company: string;
+  position: string;
+  status: AppStatus;
+}
 
 function App() {
   const [company, setCompany] = useState('')
   const [position, setPosition] = useState('')
-  const [status, setStatus] = useState('Applied')
-  const [applications, setApplications] = useState([])
+  const [status, setStatus] = useState<AppStatus>('Applied')
+  const [applications, setApplications] = useState<JobApplication[]>([])
   const [filter, setFilter] = useState('All')
 
   const isFirstRender = useRef(true)
@@ -26,7 +35,7 @@ function App() {
   }, [applications])
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const newApplication = {
@@ -44,7 +53,7 @@ function App() {
 
   }
 
-  const handleDelete = (idToDelete) => {
+  const handleDelete = (idToDelete: number) => {
     setApplications(applications.filter(app => app.id !== idToDelete))
   }
 
@@ -80,7 +89,7 @@ function App() {
         <div>
           <select
             value={status}
-            onChange={(e) => setStatus(e.target.value)}
+            onChange={(e) => setStatus(e.target.value as AppStatus)}
             style={{ width: '100%', padding: '10px', fontSize: '16px', marginTop: '15px' }}
           >
             <option value="Applied">Applied</option>
